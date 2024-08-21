@@ -81,4 +81,24 @@ public class FoodController {
         return WebResponse.<FoodResponse>builder().data(foodResponse).build();
     }
 
+
+    @DeleteMapping(
+            path = "/api/foods/{foodId}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<String> delete(@PathVariable("foodId") String foodId) {
+        logger.debug("Received request to delete food item with ID: {}", foodId);
+
+        try {
+            foodService.delete(foodId);
+            logger.info("Successfully deleted food item with ID: {}", foodId);
+        } catch (Exception e) {
+            logger.error("Error deleting food item with ID: {}. Error: {}", foodId, e.getMessage());
+            throw e;
+        }
+
+        return WebResponse.<String>builder().data("OK").build();
+    }
+
+
 }

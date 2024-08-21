@@ -1,39 +1,39 @@
-# Food Ordering System
+# 🍽️ Food Ordering System
 
 ## Overview
 
-This project is a Spring Boot application designed for users to browse and order food from various outlets. Users can select food items, add custom add-ons, and place orders. The system also maintains a snapshot of the food and add-ons associated with each order to ensure data consistency.
+Welcome to the **Food Ordering System**, a robust Spring Boot application that simplifies food ordering from multiple outlets. Users can browse menus, customize food items with add-ons, and place orders effortlessly. The system ensures data consistency by capturing snapshots of food and add-ons at the time of ordering.
 
-## Features
+## ✨ Features
 
 - **Food Management:**
-    - Fetch all available food items.
-    - Fetch specific food details based on the food ID.
-    - Add new food items with or without add-ons.
-    - Modify food details including name, description, and price.
-    - Delete food items.
+    - 🔍 Fetch all available food items.
+    - 📄 View specific food details by ID.
+    - ➕ Add new food items with or without add-ons.
+    - ✏️ Modify food details including name, description, and price.
+    - 🗑️ Delete food items.
 
 - **Add-On Management:**
-    - Add new add-ons to existing food items.
-    - Modify add-on details including name, description, and price.
-    - Delete add-ons from food items.
+    - ➕ Add new add-ons to existing food items.
+    - ✏️ Modify add-on details including name, description, and price.
+    - 🗑️ Delete add-ons from food items.
 
 - **Order Management:**
-    - Create orders while storing snapshots of the food items and add-ons associated with the order.
-    - Query orders along with the detailed snapshot of the ordered food and add-ons.
+    - 🛒 Create orders with food and add-on snapshots.
+    - 📄 Query orders along with detailed snapshots of ordered food and add-ons.
 
-- **Merchant and Outlet Management:**
-    - Query all merchants.
-    - Query outlets by merchant ID.
-    - Query food items available at a specific outlet.
+- **Merchant & Outlet Management:**
+    - 🏢 Query all merchants.
+    - 🏬 Query outlets by merchant ID.
+    - 🍲 Query food items available at a specific outlet.
 
 - **Logging:**
-    - Generate logs for all API requests and responses.
-    - Log database queries and insertions.
-    - Error logging with detailed messages for troubleshooting.
-    - Logging of order details such as total price, outlet, and merchant information after an order is created.
+    - 📝 Generate logs for all API requests and responses.
+    - 📊 Log database queries and insertions.
+    - ❗ Error logging with detailed messages for troubleshooting.
+    - 📈 Log order details such as total price, outlet, and merchant information after an order is created.
 
-## Database Schema
+## 🗄️ Database Schema
 
 ### Tables
 
@@ -91,7 +91,8 @@ This project is a Spring Boot application designed for users to browse and order
     - `name` (String): Name of the outlet.
     - `description` (String): Description of the outlet.
 
-## API Endpoints
+## 📑 API Endpoints
+Detailed information for each API endpoint can be found in the [API Specification Document](docs/api-spec.md).
 
 ### Food Endpoints
 - **GET** `/api/foods` - Fetch all available food items.
@@ -114,8 +115,8 @@ This project is a Spring Boot application designed for users to browse and order
 - **GET** `/api/merchants/{merchantId}/outlets` - Fetch all outlets for a specific merchant.
 - **GET** `/api/outlets/{outletId}/foods` - Fetch food items available at a specific outlet.
 
-## Getting Started
+## 🚀 Getting Started
 
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/your-username/food-ordering-system.git

@@ -206,13 +206,14 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 <a id="add-add-on-to-a-food-item"></a>
 <summary><b>Add Add-On to a Food Item</b></summary>
 
-**Endpoint:** `POST /api/foods/{foodId}/add-ons`
+**Endpoint:** `POST /api/add-ons`
 
 **Description:** Adds a new add-on to a specific food item.
 
 **Request Body :**
 ```json
 {
+  "food_id": "food-123",
   "name": "Extra Cheese",
   "description": "Additional cheese for a richer taste.",
   "price": 1.00
@@ -224,6 +225,7 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 {
   "data": {
     "id": "add-on-456",
+    "food_id": "food-123",
     "name": "Extra Cheese",
     "description": "Additional cheese for a richer taste.",
     "price": 1.00
@@ -250,6 +252,7 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 **Request Body :**
 ```json
 {
+  "food_id": "food-123",
   "name": "Extra Cheese",
   "description": "Additional layer of melted cheese.",
   "price": 1.00
@@ -261,6 +264,7 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 {
   "data": {
     "id": "addon-123",
+    "food_id": "food-123",
     "name": "Extra Cheese",
     "description": "Additional layer of melted cheese.",
     "price": 1.00

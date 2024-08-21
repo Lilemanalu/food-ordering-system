@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -36,5 +33,23 @@ public class AddOnController {
         logger.info("Successfully created AddOn with ID: {} for Food ID: {}", addOnResponse.getId(), addOnResponse.getFood_id());
         return WebResponse.<AddOnResponse>builder().data(addOnResponse).build();
     }
+
+    @PutMapping(
+            path = "/api/add-ons/{add0nId}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<AddOnResponse> update(@RequestBody AddOnRequest request,
+                                             @PathVariable("addOnId") String id) {
+        log.debug("Received request to update AddOn with id: {} for Food with id: {}", id, request.getFood_id());
+
+        request.setId(id);
+
+        AddOnResponse addOnResponse = addOnService.update(request, id);
+
+        log.info("Successfully updated AddOn with id: {} for Food with id: {}", id, addOnResponse.getFood_id());
+
+        return WebResponse.<AddOnResponse>builder().data(addOnResponse).build();
+    }
+
 
 }

@@ -1,9 +1,6 @@
 package lile_manalu.spring_boot_project.controller;
 
-import lile_manalu.spring_boot_project.model.CreateFoodRequest;
-import lile_manalu.spring_boot_project.model.CreateFoodResponse;
-import lile_manalu.spring_boot_project.model.FoodResponse;
-import lile_manalu.spring_boot_project.model.WebResponse;
+import lile_manalu.spring_boot_project.model.*;
 import lile_manalu.spring_boot_project.service.FoodService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -61,5 +58,23 @@ public class FoodController {
         }
     }
 
+
+    public WebResponse<FoodResponse> update(@RequestBody UpdateFoodRequest request,
+                                            @PathVariable String foodId) {
+        logger.debug("Received request to update food item with ID: {} and data: {}", foodId, request);
+
+        request.setId(foodId);
+        FoodResponse foodResponse;
+        try {
+            foodResponse = foodService.update(request);
+
+            logger.debug("Successfully updated food item with ID: {}. Response data: {}", foodId, foodResponse);
+        } catch (Exception e) {
+            logger.error("Error updating food item with ID: {}. Error: {}", foodId, e.getMessage());
+            throw e;
+        }
+
+        return WebResponse.<FoodResponse>builder().data(foodResponse).build();
+    }
 
 }

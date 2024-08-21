@@ -22,6 +22,8 @@ public class FoodService {
     private FoodRepository foodRepository;
 
     public FoodResponse create(CreateFoodRequest request){
+        logger.debug("Request to create food: {}", request);
+
         Food food = new Food();
         food.setId(UUID.randomUUID().toString());
         food.setOutlet_id(request.getOutlet_id());
@@ -29,10 +31,10 @@ public class FoodService {
         food.setDescription(request.getDescription());
         food.setPrice(request.getPrice());
 
-        foodRepository.save(food);
-        logger.info("Created new food item: {}", food);
+        Food savedFood = foodRepository.save(food);
+        logger.info("Created new food item: {}", savedFood);
 
-        return toFoodResponse(food);
+        return toFoodResponse(savedFood);
     }
 
     private FoodResponse toFoodResponse(Food food){

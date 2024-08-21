@@ -158,7 +158,7 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 <details>
 <a id="delete-food"></a>
 <summary><b>Delete Food</b></summary>
-### Delete Food
+
 **Endpoint:** `DELETE /api/foods/{foodId}`
 
 **Description:** Deletes a specific food item.

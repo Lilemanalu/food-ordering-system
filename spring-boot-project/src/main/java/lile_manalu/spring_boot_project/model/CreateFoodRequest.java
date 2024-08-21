@@ -19,5 +19,5 @@ public class CreateFoodRequest {
 
     private String description;
 
-    private String price;
+    private Double price;
 }

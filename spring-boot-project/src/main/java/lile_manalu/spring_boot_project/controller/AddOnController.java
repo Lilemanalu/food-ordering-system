@@ -51,5 +51,19 @@ public class AddOnController {
         return WebResponse.<AddOnResponse>builder().data(addOnResponse).build();
     }
 
+    @DeleteMapping(
+            path = "/api/add-ons/{addOnId}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<String> remove(@PathVariable("addOnId") String id) {
+        log.debug("Received request to delete AddOn with id: {}", id);
+
+        addOnService.remove(id);
+
+        log.info("Successfully deleted AddOn with id: {}", id);
+
+        return WebResponse.<String>builder().data("OK").build();
+    }
+
 
 }

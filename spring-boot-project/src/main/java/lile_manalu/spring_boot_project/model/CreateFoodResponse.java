@@ -24,6 +24,6 @@ public class CreateFoodResponse {
 
     private Double price;
 
-    private List<AddOn> addOns;
+    private List<AddOnResponse> addOns;
 
 }

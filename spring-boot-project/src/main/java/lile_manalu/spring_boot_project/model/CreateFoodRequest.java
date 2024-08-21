@@ -24,5 +24,5 @@ public class CreateFoodRequest {
 
     private Double price;
 
-    private List<AddOn> addOns;
+    private List<AddOnRequest> addOns;
 }

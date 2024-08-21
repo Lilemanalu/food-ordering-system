@@ -19,24 +19,17 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
   "data": [
     {
       "id": "food-123",
+      "outlet_id": "outlet-001",
       "name": "Burger",
       "description": "A juicy beef burger with cheese.",
-      "price": 5.99,
-      "addOns": []
+      "price": 5.99
     },
     {
       "id": "food-456",
+      "outlet_id": "outlet-002",
       "name": "Pizza",
       "description": "Cheese pizza with a crispy crust.",
-      "price": 8.99,
-      "addOns": [
-        {
-          "id": "add-on-789",
-          "name": "Extra Cheese",
-          "description": "Additional cheese topping.",
-          "price": 1.00
-        }
-      ]
+      "price": 8.99
     }
   ]
 }
@@ -63,10 +56,10 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 {
   "data": {
     "id": "food-123",
+    "outlet_id": "outlet-001",
     "name": "Burger",
     "description": "A juicy beef burger with cheese.",
-    "price": 5.99,
-    "addOns": []
+    "price": 5.99
   }
 }
 ```
@@ -93,7 +86,19 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
   "outlet_id": "outlet-1",
   "name": "Margherita Pizza",
   "description": "Classic Margherita pizza with fresh basil.",
-  "price": 12.5
+  "price": 12.5,
+  "addOns": [
+    {
+      "name": "Extra Cheese",
+      "description": "Additional cheese topping.",
+      "price": 1.00
+    },
+    {
+      "name": "Olives",
+      "description": "Black olives.",
+      "price": 0.75
+    }
+  ]
 }
 ```
 
@@ -105,7 +110,23 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
     "outlet_id": "outlet-1",
     "name": "Margherita Pizza",
     "description": "Classic Margherita pizza with fresh basil.",
-    "price": 12.5
+    "price": 12.5,
+    "addOns": [
+      {
+        "id": "add-on-1",
+        "food_id": "food-1",
+        "name": "Extra Cheese",
+        "description": "Additional cheese topping.",
+        "price": 1.00
+      },
+      {
+        "id": "add-on-2",
+        "food_id": "food-1",
+        "name": "Olives",
+        "description": "Black olives.",
+        "price": 0.75
+      }
+    ]
   }
 }
 ```
@@ -129,6 +150,7 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 **Request Body :**
 ```json
 {
+  "outlet_id": "outlet-001",
   "name": "Veggie Burger",
   "description": "A delicious veggie burger with a blend of fresh vegetables.",
   "price": 5.50
@@ -140,6 +162,7 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 {
   "data": {
     "id": "food-123",
+    "outlet_id": "outlet-001",
     "name": "Veggie Burger",
     "description": "A delicious veggie burger with a blend of fresh vegetables.",
     "price": 5.50

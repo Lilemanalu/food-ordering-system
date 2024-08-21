@@ -4,31 +4,11 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 
 ## 📋 Endpoints Overview
 
-### Food Endpoints
-- **GET** `/api/foods` - Fetch all available food items.
-- **GET** `/api/foods/{foodId}` - Fetch details of a specific food item.
-- **POST** `/api/foods` - Add a new food item.
-- **PUT** `/api/foods/{foodId}` - Modify details of an existing food item.
-- **DELETE** `/api/foods/{foodId}` - Delete a specific food item.
-
-### Add-On Endpoints
-- **POST** `/api/foods/{foodId}/add-ons` - Add a new add-on to a specific food item.
-- **PUT** `/api/add-ons/{addOnId}` - Modify details of an existing add-on.
-- **DELETE** `/api/add-ons/{addOnId}` - Delete a specific add-on.
-
-### Order Endpoints
-- **POST** `/api/orders` - Create a new order with food and add-on snapshots.
-- **GET** `/api/orders/{orderId}` - Fetch details of a specific order.
-
-### Merchant & Outlet Endpoints
-- **GET** `/api/merchants` - Fetch all merchants.
-- **GET** `/api/merchants/{merchantId}/outlets` - Fetch all outlets for a specific merchant.
-- **GET** `/api/outlets/{outletId}/foods` - Fetch food items available at a specific outlet.
-
-
 ## Food Endpoints
+<details>
+<a id="fetch-all-food-items"></a>
+<summary><b>Fetch All Food Items</b></summary>
 
-### Fetch All Food Items
 **Endpoint:** `GET /api/foods`
 
 **Description:** Retrieves a list of all available food items.
@@ -62,15 +42,18 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "No food items found"
 }
 ```
+</details>
 
+<details>
+<a id="fetch-food-details-by-id"></a>
+<summary><b>Fetch Food Details by ID</b></summary>
 
-### Fetch Food Details by ID
 **Endpoint:** `GET /api/foods/{foodId}`
 
 **Description:** Retrieves details of a specific food item by its ID.
@@ -88,15 +71,18 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "Food item not found"
 }
 ```
+</details>
 
+<details>
+<a id="add-a-new-food-item"></a>
+<summary><b>Add a New Food Item</b></summary>
 
-### Add a New Food Item
 **Endpoint:** `POST /api/foods`
 
 **Description:** Adds a new food item to the system.
@@ -124,15 +110,18 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "Invalid data provided. Price must be a positive number."
 }
 ```
+</details>
 
+<details>
+<a id="modify-food-item"></a>
+<summary><b>Modify Food Item</b></summary>
 
-### Modify Food Item
 **Endpoint:** `PUT /api/foods/{foodId}`
 
 **Description:** Modifies details of an existing food item.
@@ -158,14 +147,17 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "Price is invalid"
 }
 ```
+</details>
 
-
+<details>
+<a id="delete-food"></a>
+<summary><b>Delete Food</b></summary>
 ### Delete Food
 **Endpoint:** `DELETE /api/foods/{foodId}`
 
@@ -178,16 +170,19 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "Food is not found"
 }
 ```
-
+</details>
 
 ## Add-On Endpoints
-### Add Add-On to a Food Item
+<details>
+<a id="add-add-on-to-a-food-item"></a>
+<summary><b>Add Add-On to a Food Item</b></summary>
+
 **Endpoint:** `POST /api/foods/{foodId}/add-ons`
 
 **Description:** Adds a new add-on to a specific food item.
@@ -213,15 +208,18 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "Price is invalid"
 }
 ```
+</details>
 
+<details>
+<a id="modify-add-on"></a>
+<summary><b>Modify Add-On</b></summary>
 
-### Modify Add-On
 **Endpoint:** `PUT /api/add-ons/{addOnId}`
 
 **Description:** Modifies details of an existing add-on.
@@ -247,15 +245,18 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "Price is invalid"
 }
 ```
+</details>
 
+<details>
+<a id="delete-add-on"></a>
+<summary><b>Delete Add-On</b></summary>
 
-### Delete Add-On
 **Endpoint:** `DELETE /api/add-ons/{addOnId}`
 
 **Description:** Deletes a specific add-on.
@@ -267,16 +268,19 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "Add-on is not found"
 }
 ```
-
+</details>
 
 ## Order Endpoints
-### Create Order
+<details>
+<a id="create-order"></a>
+<summary><b>Create Order</b></summary>
+
 **Endpoint:** `POST /api/orders`
 
 **Description:** Creates a new order with food and add-on snapshots.
@@ -325,15 +329,18 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "Invalid userId or outletId"
 }
 ```
+</details>
 
+<details>
+<a id="fetch-order-details"></a>
+<summary><b>Fetch Order Details</b></summary>
 
-### Fetch Order Details
 **Endpoint:** `GET /api/orders/{orderId}`
 
 **Description:** Fetches details of a specific order.
@@ -365,16 +372,19 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "Order not found"
 }
 ```
-
+</details>
 
 ## Merchant & Outlet  Endpoints
-### Fetch All Merchants
+<details>
+<a id="fetch-all-merchants"></a>
+<summary><b>Fetch All Merchants</b></summary>
+
 **Endpoint:** `GET /api/merchants`
 
 **Description:** Fetches a list of all merchants.
@@ -397,15 +407,18 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "No merchants found"
 }
 ```
+</details>
 
+<details>
+<a id="fetch-all-outlets-for-a-specific-merchant"></a>
+<summary><b>Fetch All Outlets for a Specific Merchant</b></summary>
 
-### Fetch All Outlets for a Specific Merchant
 **Endpoint:** `GET /api/merchants/{merchantId}/outlets`
 
 **Description:** Fetches all outlets associated with a specific merchant.
@@ -433,15 +446,18 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "No outlets found for the specified merchant"
 }
 ```
+</details>
 
+<details>
+<a id="fetch-food-items-available-at-a-specific-outlet"></a>
+<summary><b>Fetch Food Items Available at a Specific Outlet</b></summary>
 
-### Fetch Food Items Available at a Specific Outlet
 **Endpoint:** `GET /api/outlets/{outletId}/foods`
 
 **Description:** Fetches all food items available at a specific outlet.
@@ -471,9 +487,11 @@ Welcome to the Food Ordering System API documentation. Below is a detailed overv
 }
 ```
 
-**Response Body (Success):**
+**Response Body (Failed):**
 ```json
 {
   "errors": "No food items found for the specified outlet"
 }
 ```
+
+</details>

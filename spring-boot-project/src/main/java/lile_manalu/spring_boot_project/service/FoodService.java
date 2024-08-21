@@ -2,7 +2,9 @@ package lile_manalu.spring_boot_project.service;
 
 import lile_manalu.spring_boot_project.entity.Food;
 import lile_manalu.spring_boot_project.model.CreateFoodRequest;
+import lile_manalu.spring_boot_project.model.CreateFoodResponse;
 import lile_manalu.spring_boot_project.model.FoodResponse;
+import lile_manalu.spring_boot_project.model.UpdateFoodRequest;
 import lile_manalu.spring_boot_project.repository.FoodRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -23,7 +25,7 @@ public class FoodService {
     @Autowired
     private FoodRepository foodRepository;
 
-    public FoodResponse create(CreateFoodRequest request){
+    public CreateFoodResponse create(CreateFoodRequest request){
         logger.debug("Request to create food: {}", request);
 
         Food food = new Food();
@@ -39,16 +41,6 @@ public class FoodService {
         return toFoodResponse(savedFood);
     }
 
-    private FoodResponse toFoodResponse(Food food){
-        return FoodResponse.builder()
-                .id(food.getId())
-                .outlet_id(food.getOutlet_id())
-                .name(food.getName())
-                .description(food.getDescription())
-                .price(food.getPrice())
-                .build();
-    }
-
     public FoodResponse get(String id) {
         logger.debug("Fetching food item with ID: {}", id);
 
@@ -62,6 +54,33 @@ public class FoodService {
         logger.debug("Retrieved food item: {}", response);
 
         return response;
+    }
+
+    public FoodResponse update(UpdateFoodRequest request){
+        logger.debug("Received update request: {}", request);
+
+        Food food = foodRepository.findById(request.getId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Food not found"));
+
+        food.setOutlet_id(request.getOutlet_id());
+        food.setName(request.getName());
+        food.setDescription(request.getDescription());
+        food.setPrice(request.getPrice());
+        foodRepository.save(food);
+
+        logger.info("Updated food item: {}", food);
+
+        return toFoodResponse(food);
+    }
+
+    private FoodResponse toFoodResponse(Food food){
+        return FoodResponse.builder()
+                .id(food.getId())
+                .outlet_id(food.getOutlet_id())
+                .name(food.getName())
+                .description(food.getDescription())
+                .price(food.getPrice())
+                .build();
     }
 
 }

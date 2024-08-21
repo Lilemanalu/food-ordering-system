@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface AddOnRepository extends JpaRepository<AddOn, String> {
     @Override
     Optional<AddOn> findById(String id);
+
+    Optional<AddOn> findFirstByFoodIdAndId(String food_id, String id);
 }

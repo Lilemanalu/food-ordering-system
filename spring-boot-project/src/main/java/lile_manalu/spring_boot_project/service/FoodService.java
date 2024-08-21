@@ -8,7 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
@@ -45,6 +47,21 @@ public class FoodService {
                 .description(food.getDescription())
                 .price(food.getPrice())
                 .build();
+    }
+
+    public FoodResponse get(String id) {
+        logger.debug("Fetching food item with ID: {}", id);
+
+        Food food = foodRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.error("Food item not found with ID: {}", id);
+                    return new ResponseStatusException(HttpStatus.NOT_FOUND, "Food item not found");
+                });
+
+        FoodResponse response = toFoodResponse(food);
+        logger.debug("Retrieved food item: {}", response);
+
+        return response;
     }
 
 }

@@ -13,6 +13,9 @@ import lombok.NoArgsConstructor;
 public class AddOnRequest {
 
     @JsonIgnore
+    private String id;
+
+    @JsonIgnore
     private String food_id;
 
     private String name;

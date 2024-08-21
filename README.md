@@ -37,28 +37,6 @@ Welcome to the **Food Ordering System**, a robust Spring Boot application that s
 ## 📑 API Endpoints
 Detailed information for each API endpoint can be found in the [API Specification Document](docs/api-spec.md).
 
-### Food Endpoints
-- **[Fetch All Food Items](docs/api-spec.md#fetch-all-food-items)**
-- **[Fetch Food Details by ID](docs/api-spec.md#fetch-food-details-by-id)**
-- **[Add a New Food Item](docs/api-spec.md#add-a-new-food-item)**
-- **[Modify Food Item](docs/api-spec.md#modify-food-item)**
-- **[Delete Food](docs/api-spec.md#delete-food)**
-
-### Add-On Endpoints
-- **[Add Add-On to a Food Item](docs/api-spec.md#add-add-on-to-a-food-item)**
-- **[Modify Add-On](docs/api-spec.md#modify-add-on)**
-- **[Delete Add-On](docs/api-spec.md#delete-add-on)**
-
-### Order Endpoints
-- **[Create Order](docs/api-spec.md#create-order)**
-- **[Fetch Order Details](docs/api-spec.md#fetch-order-details)**
-
-### Merchant & Outlet Endpoints
-- **[Fetch All Merchants](docs/api-spec.md#fetch-all-merchants)**
-- **[Fetch All Outlets for a Specific Merchant](docs/api-spec.md#fetch-all-outlets-for-a-specific-merchant)**
-- **[Fetch Food Items Available at a Specific Outlet](docs/api-spec.md#fetch-food-items-available-at-a-specific-outlet)**
-
-
 ## 🚀 Getting Started
 
 1. **Clone the repository:**

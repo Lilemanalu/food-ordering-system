@@ -10,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 public class FoodController {
@@ -100,5 +102,18 @@ public class FoodController {
         return WebResponse.<String>builder().data("OK").build();
     }
 
+
+    @GetMapping(
+            path = "/api/foods",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<List<FoodResponse>> list() {
+        logger.debug("Received request to fetch all food items");
+
+        List<FoodResponse> foodResponses = foodService.list();
+
+        logger.info("Returning {} food items", foodResponses.size());
+        return WebResponse.<List<FoodResponse>>builder().data(foodResponses).build();
+    }
 
 }

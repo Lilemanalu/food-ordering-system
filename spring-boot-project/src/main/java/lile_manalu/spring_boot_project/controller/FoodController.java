@@ -58,7 +58,11 @@ public class FoodController {
         }
     }
 
-
+    @PutMapping(
+            path = "/api/foods/{foodId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     public WebResponse<FoodResponse> update(@RequestBody UpdateFoodRequest request,
                                             @PathVariable String foodId) {
         logger.debug("Received request to update food item with ID: {} and data: {}", foodId, request);

@@ -24,18 +24,16 @@ public class AddOnController {
     private AddOnService addOnService;
 
     @PostMapping(
-            path = "/api/foods/{foodId}/addOns",
+            path = "/api/add-ons",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public WebResponse<AddOnResponse> create(@RequestBody AddOnRequest request,
-                                             @PathVariable("foodId") String foodId) {
-        logger.debug("Received request to create AddOn for Food ID: {}", foodId);
+    public WebResponse<AddOnResponse> create(@RequestBody AddOnRequest request) {
+        logger.debug("Received request to create AddOn for Food ID: {}", request.getFood_id());
 
-        request.setFoodId(foodId);
         AddOnResponse addOnResponse = addOnService.create(request);
 
-        logger.info("Successfully created AddOn with ID: {} for Food ID: {}", addOnResponse.getId(), foodId);
+        logger.info("Successfully created AddOn with ID: {} for Food ID: {}", addOnResponse.getId(), addOnResponse.getFood_id());
         return WebResponse.<AddOnResponse>builder().data(addOnResponse).build();
     }
 

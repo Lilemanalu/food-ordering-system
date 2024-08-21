@@ -73,6 +73,19 @@ public class FoodService {
         return toFoodResponse(food);
     }
 
+    public void delete(String foodId) {
+        try {
+            Food food = foodRepository.findById(foodId)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Food not found"));
+
+            foodRepository.delete(food);
+            logger.info("Successfully deleted food item with ID: {}", foodId);
+        } catch (ResponseStatusException e) {
+            logger.error("Error deleting food item with ID: {}. Error: {}", foodId, e.getReason());
+            throw e;
+        }
+    }
+
     private FoodResponse toFoodResponse(Food food){
         return FoodResponse.builder()
                 .id(food.getId())

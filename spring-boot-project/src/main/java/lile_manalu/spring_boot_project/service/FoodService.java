@@ -1,10 +1,9 @@
 package lile_manalu.spring_boot_project.service;
 
+import lile_manalu.spring_boot_project.entity.AddOn;
 import lile_manalu.spring_boot_project.entity.Food;
-import lile_manalu.spring_boot_project.model.CreateFoodRequest;
-import lile_manalu.spring_boot_project.model.CreateFoodResponse;
-import lile_manalu.spring_boot_project.model.FoodResponse;
-import lile_manalu.spring_boot_project.model.UpdateFoodRequest;
+import lile_manalu.spring_boot_project.model.*;
+import lile_manalu.spring_boot_project.repository.AddOnRepository;
 import lile_manalu.spring_boot_project.repository.FoodRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -27,7 +27,10 @@ public class FoodService {
     @Autowired
     private FoodRepository foodRepository;
 
-    public CreateFoodResponse create(CreateFoodRequest request){
+    @Autowired
+    private AddOnRepository addOnRepository;
+
+    public CreateFoodResponse create(CreateFoodRequest request) {
         logger.debug("Request to create food: {}", request);
 
         Food food = new Food();
@@ -40,8 +43,43 @@ public class FoodService {
         Food savedFood = foodRepository.save(food);
         logger.info("Created new food item: {}", savedFood);
 
-        return toFoodResponse(savedFood);
+        List<AddOnResponse> addOnResponses = new ArrayList<>();
+
+        // If there are add-ons, create and save them
+        if (request.getAddOns() != null && !request.getAddOns().isEmpty()) {
+            for (AddOnRequest addOnRequest : request.getAddOns()) {
+                AddOn addOn = new AddOn();
+                addOn.setId(UUID.randomUUID().toString());
+                addOn.setFood(savedFood);
+                addOn.setName(addOnRequest.getName());
+                addOn.setDescription(addOnRequest.getDescription());
+                addOn.setPrice(addOnRequest.getPrice());
+
+                AddOn savedAddOn = addOnRepository.save(addOn);
+                logger.info("Created new add-on: {}", savedAddOn);
+
+                addOnResponses.add(
+                        AddOnResponse.builder()
+                                .id(savedAddOn.getId())
+                                .food_id(savedAddOn.getFood_id())
+                                .name(savedAddOn.getName())
+                                .description(savedAddOn.getDescription())
+                                .price(savedAddOn.getPrice())
+                                .build()
+                );
+            }
+        }
+
+        return CreateFoodResponse.builder()
+                .id(savedFood.getId())
+                .outlet_id(savedFood.getOutlet_id())
+                .name(savedFood.getName())
+                .price(savedFood.getPrice())
+                .description(savedFood.getDescription())
+                .addOns(addOnResponses)
+                .build();
     }
+
 
     public FoodResponse get(String id) {
         logger.debug("Fetching food item with ID: {}", id);

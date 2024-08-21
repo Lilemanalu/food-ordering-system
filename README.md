@@ -38,25 +38,26 @@ Welcome to the **Food Ordering System**, a robust Spring Boot application that s
 Detailed information for each API endpoint can be found in the [API Specification Document](docs/api-spec.md).
 
 ### Food Endpoints
-- **GET** `/api/foods` - Fetch all available food items.
-- **GET** `/api/foods/{foodId}` - Fetch details of a specific food item.
-- **POST** `/api/foods` - Add a new food item.
-- **PUT** `/api/foods/{foodId}` - Modify details of an existing food item.
-- **DELETE** `/api/foods/{foodId}` - Delete a specific food item.
+- **[Fetch All Food Items](docs/api-spec.md#fetch-all-food-items)**
+- **[Fetch Food Details by ID](docs/api-spec.md#fetch-food-details-by-id)**
+- **[Add a New Food Item](docs/api-spec.md#add-a-new-food-item)**
+- **[Modify Food Item](docs/api-spec.md#modify-food-item)**
+- **[Delete Food](docs/api-spec.md#delete-food)**
 
 ### Add-On Endpoints
-- **POST** `/api/foods/{foodId}/add-ons` - Add a new add-on to a specific food item.
-- **PUT** `/api/add-ons/{addOnId}` - Modify details of an existing add-on.
-- **DELETE** `/api/add-ons/{addOnId}` - Delete a specific add-on.
+- **[Add Add-On to a Food Item](docs/api-spec.md#add-add-on-to-a-food-item)**
+- **[Modify Add-On](docs/api-spec.md#modify-add-on)**
+- **[Delete Add-On](docs/api-spec.md#delete-add-on)**
 
 ### Order Endpoints
-- **POST** `/api/orders` - Create a new order with food and add-on snapshots.
-- **GET** `/api/orders/{orderId}` - Fetch details of a specific order.
+- **[Create Order](docs/api-spec.md#create-order)**
+- **[Fetch Order Details](docs/api-spec.md#fetch-order-details)**
 
 ### Merchant & Outlet Endpoints
-- **GET** `/api/merchants` - Fetch all merchants.
-- **GET** `/api/merchants/{merchantId}/outlets` - Fetch all outlets for a specific merchant.
-- **GET** `/api/outlets/{outletId}/foods` - Fetch food items available at a specific outlet.
+- **[Fetch All Merchants](docs/api-spec.md#fetch-all-merchants)**
+- **[Fetch All Outlets for a Specific Merchant](docs/api-spec.md#fetch-all-outlets-for-a-specific-merchant)**
+- **[Fetch Food Items Available at a Specific Outlet](docs/api-spec.md#fetch-food-items-available-at-a-specific-outlet)**
+
 
 ## 🚀 Getting Started
 

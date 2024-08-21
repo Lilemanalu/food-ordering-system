@@ -27,13 +27,6 @@ Welcome to the **Food Ordering System**, a robust Spring Boot application that s
     - 🏬 Query outlets by merchant ID.
     - 🍲 Query food items available at a specific outlet.
 
-- **Logging:**
-    - 📝 Generate logs for all API requests and responses.
-    - 📊 Log database queries and insertions.
-    - ❗ Error logging with detailed messages for troubleshooting.
-    - 📈 Log order details such as total price, outlet, and merchant information after an order is created.
-
-
 ## 📑 API Endpoints
 Detailed information for each API endpoint can be found in the [API Specification Document](docs/api-spec.md).
 

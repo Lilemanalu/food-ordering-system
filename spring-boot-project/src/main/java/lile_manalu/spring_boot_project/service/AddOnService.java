@@ -81,6 +81,21 @@ public class AddOnService {
         return toAddOnResponse(addOn);
     }
 
+    public void remove(String id) {
+        log.debug("Starting delete process for AddOn with id: {}", id);
+
+        AddOn addOn = addOnRepository.findById( id)
+                .orElseThrow(() -> {
+                    log.error("Add On with id: {} not found", id);
+                    return new ResponseStatusException(HttpStatus.NOT_FOUND, "Add On is not found");
+                });
+
+        log.debug("Deleting AddOn with id: {} for Food with id: {}", addOn.getId(), addOn.getFood_id());
+
+        addOnRepository.delete(addOn);
+
+        log.info("Successfully deleted AddOn with id: {} for Food with id: {}", addOn.getId(), addOn.getFood_id());
+    }
 
     private AddOnResponse toAddOnResponse(AddOn addOn) {
         return AddOnResponse.builder()
@@ -91,6 +106,5 @@ public class AddOnService {
                 .price(addOn.getPrice())
                 .build();
     }
-
-
+    
 }

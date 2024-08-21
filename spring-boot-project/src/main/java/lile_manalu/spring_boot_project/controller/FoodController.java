@@ -1,6 +1,7 @@
 package lile_manalu.spring_boot_project.controller;
 
 import lile_manalu.spring_boot_project.model.CreateFoodRequest;
+import lile_manalu.spring_boot_project.model.CreateFoodResponse;
 import lile_manalu.spring_boot_project.model.FoodResponse;
 import lile_manalu.spring_boot_project.model.WebResponse;
 import lile_manalu.spring_boot_project.service.FoodService;
@@ -27,19 +28,19 @@ public class FoodController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public WebResponse<FoodResponse> create(@RequestBody CreateFoodRequest request) {
+    public WebResponse<CreateFoodResponse> create(@RequestBody CreateFoodRequest request) {
         logger.debug("Received request to create food: {}", request);
 
-        FoodResponse foodResponse;
+        CreateFoodResponse createFoodResponse;
         try {
-            foodResponse = foodService.create(request);
-            logger.debug("Food created successfully: {}", foodResponse);
+            createFoodResponse = foodService.create(request);
+            logger.debug("Food created successfully: {}", createFoodResponse);
         } catch (Exception e) {
             logger.error("Error creating food", e);
             throw e;
         }
 
-        return WebResponse.<FoodResponse>builder().data(foodResponse).build();
+        return WebResponse.<CreateFoodResponse>builder().data(createFoodResponse).build();
     }
 
 

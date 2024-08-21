@@ -51,6 +51,37 @@ public class AddOnService {
         return toAddOnResponse(addOn);
     }
 
+    public AddOnResponse update(AddOnRequest request, String id) {
+        log.debug("Starting update process for AddOn with id: {} for Food with id: {}", id, request.getFood_id());
+
+        Food food = foodRepository.findById(request.getFood_id())
+                .orElseThrow(() -> {
+                    log.error("Food with id: {} not found", request.getFood_id());
+                    return new ResponseStatusException(HttpStatus.NOT_FOUND, "Food is not found");
+                });
+
+        AddOn addOn = addOnRepository.findFirstByFoodIdAndId(request.getFood_id(), id)
+                .orElseThrow(() -> {
+                    log.error("Add On with id: {} not found for Food with id: {}", id, request.getFood_id());
+                    return new ResponseStatusException(HttpStatus.NOT_FOUND, "Add On is not found");
+                });
+
+        log.debug("Updating AddOn with id: {} for Food with id: {}. New name: {}, New description: {}, New price: {}",
+                addOn.getId(), request.getFood_id(), request.getName(), request.getDescription(), request.getPrice());
+
+        addOn.setFood_id(request.getFood_id());
+        addOn.setName(request.getName());
+        addOn.setDescription(request.getDescription());
+        addOn.setPrice(request.getPrice());
+        addOn.setFood(food);
+        addOnRepository.save(addOn);
+
+        log.info("Successfully updated AddOn with id: {} for Food with id: {}", addOn.getId(), request.getFood_id());
+
+        return toAddOnResponse(addOn);
+    }
+
+
     private AddOnResponse toAddOnResponse(AddOn addOn) {
         return AddOnResponse.builder()
                 .id(addOn.getId())

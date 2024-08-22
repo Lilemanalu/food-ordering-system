@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -106,13 +108,90 @@ public class OrderService {
             }
         }
 
-        // Build and return the order response
         return OrderResponse.builder()
-                .id(savedOrder.getId())
-                .userId(savedOrder.getUserId())
-                .outletId(savedOrder.getOutletId())
-                .createdTime(String.valueOf(savedOrder.getCreatedTime()))
+                .id(order.getId())
+                .userId(order.getUserId())
+                .outletId(order.getOutletId())
+                .createdTime(String.valueOf(order.getCreatedTime()))
                 .foodSnapshots(foodSnapshotResponses)
                 .build();
     }
+
+    public OrderResponse get(String id) {
+        logger.debug("Fetching order with ID: {}", id);
+
+        // Retrieve the order
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> {
+                    logger.error("Order not found with ID: {}", id);
+                    return new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
+                });
+
+        // Retrieve food snapshots associated with the order
+        List<FoodSnapshot> foodSnapshots = foodSnapshotRepository.findByOrderId(id);
+        List<FoodSnapshotResponse> foodSnapshotResponses = new ArrayList<>();
+
+        for (FoodSnapshot foodSnapshot : foodSnapshots) {
+            // Retrieve add-on snapshots for each food snapshot
+            List<AddOnSnapshot> addOnSnapshots = addOnSnapshotRepository.findByFoodSnapshotId(foodSnapshot.getId());
+            List<AddOnSnapshotResponse> addOnSnapshotResponses = new ArrayList<>();
+
+            for (AddOnSnapshot addOnSnapshot : addOnSnapshots) {
+                addOnSnapshotResponses.add(
+                        AddOnSnapshotResponse.builder()
+                                .id(addOnSnapshot.getId())
+                                .AddOnId(addOnSnapshot.getAddOnId())
+                                .FoodSnapshotId(addOnSnapshot.getFoodSnapshotId())
+                                .name(addOnSnapshot.getName())
+                                .description(addOnSnapshot.getDescription())
+                                .price(addOnSnapshot.getPrice())
+                                .build()
+                );
+            }
+
+            foodSnapshotResponses.add(
+                    FoodSnapshotResponse.builder()
+                            .id(foodSnapshot.getId())
+                            .orderId(foodSnapshot.getOrderId())
+                            .foodId(foodSnapshot.getFoodId())
+                            .outletId(foodSnapshot.getOutletId())
+                            .name(foodSnapshot.getName())
+                            .description(foodSnapshot.getDescription())
+                            .price(foodSnapshot.getPrice())
+                            .addOnSnapshots(addOnSnapshotResponses)
+                            .build()
+            );
+        }
+
+        // Build and return the order response
+        return OrderResponse.builder()
+                .id(order.getId())
+                .userId(order.getUserId())
+                .outletId(order.getOutletId())
+                .createdTime(String.valueOf(order.getCreatedTime()))
+                .foodSnapshots(foodSnapshotResponses)
+                .build();
+    }
+
+
+    //    //get order by order Id
+//    public OrderResponse get(String id) {
+//        logger.debug("Fetching order with ID: {}", id);
+//
+//        Order order = orderRepository.findById(id)
+//                .orElseThrow(() -> {
+//                    logger.error("Order not found with ID: {}", id);
+//                    return new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found");
+//                });
+//
+//        return OrderResponse.builder()
+//                .id(order.getId())
+//                .userId(order.getUserId())
+//                .outletId(order.getOutletId())
+//                .createdTime(String.valueOf(order.getCreatedTime()))
+//                .build();
+//
+//        logger.debug("Retrieved order: {}", order);
+//    }
+
 }

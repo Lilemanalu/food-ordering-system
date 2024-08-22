@@ -38,11 +38,11 @@ public class AddOnService {
 
         AddOn addOn = new AddOn();
         addOn.setId(UUID.randomUUID().toString());
-        addOn.setFood_id(request.getFood_id());
+        addOn.setFoodId(request.getFood_id());
         addOn.setName(request.getName());
         addOn.setDescription(request.getDescription());
         addOn.setPrice(request.getPrice());
-        addOn.setFood(food);
+//        addOn.setFood(food);
 
         addOnRepository.save(addOn);
 
@@ -69,11 +69,11 @@ public class AddOnService {
         log.debug("Updating AddOn with id: {} for Food with id: {}. New name: {}, New description: {}, New price: {}",
                 addOn.getId(), request.getFood_id(), request.getName(), request.getDescription(), request.getPrice());
 
-        addOn.setFood_id(request.getFood_id());
+        addOn.setFoodId(request.getFood_id());
         addOn.setName(request.getName());
         addOn.setDescription(request.getDescription());
         addOn.setPrice(request.getPrice());
-        addOn.setFood(food);
+//        addOn.setFood(food);
         addOnRepository.save(addOn);
 
         log.info("Successfully updated AddOn with id: {} for Food with id: {}", addOn.getId(), request.getFood_id());
@@ -90,17 +90,17 @@ public class AddOnService {
                     return new ResponseStatusException(HttpStatus.NOT_FOUND, "Add On is not found");
                 });
 
-        log.debug("Deleting AddOn with id: {} for Food with id: {}", addOn.getId(), addOn.getFood_id());
+        log.debug("Deleting AddOn with id: {} for Food with id: {}", addOn.getId(), addOn.getFoodId());
 
         addOnRepository.delete(addOn);
 
-        log.info("Successfully deleted AddOn with id: {} for Food with id: {}", addOn.getId(), addOn.getFood_id());
+        log.info("Successfully deleted AddOn with id: {} for Food with id: {}", addOn.getId(), addOn.getFoodId());
     }
 
     private AddOnResponse toAddOnResponse(AddOn addOn) {
         return AddOnResponse.builder()
                 .id(addOn.getId())
-                .food_id(addOn.getFood_id())
+                .food_id(addOn.getFoodId())
                 .name(addOn.getName())
                 .description(addOn.getDescription())
                 .price(addOn.getPrice())

@@ -31,5 +31,5 @@ public class AddOnSnapshot {
 
     private Double price;
 
-    private Date created_time;
+    private Date createdTime;
 }

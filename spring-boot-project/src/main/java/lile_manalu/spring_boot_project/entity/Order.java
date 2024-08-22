@@ -25,5 +25,5 @@ public class Order {
 
     private String outletId;
 
-    private Date created_time;
+    private Date createdTime;
 }

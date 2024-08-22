@@ -6,10 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Slf4j
 @RestController
@@ -40,5 +40,26 @@ public class OrderController {
         return WebResponse.<OrderResponse>builder().data(orderResponse).build();
     }
 
+    @GetMapping(
+            path = "/api/orders/{orderId}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<OrderResponse> get(@PathVariable("orderId") String orderId) {
+        logger.debug("Fetching order with ID: {}", orderId);
+
+        OrderResponse orderResponse;
+        try {
+            orderResponse = orderService.get(orderId);
+            logger.debug("Order retrieved successfully: {}", orderResponse);
+        } catch (ResponseStatusException e) {
+            logger.error("Error retrieving order with ID: {}", orderId, e);
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error retrieving order with ID: {}", orderId, e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected error");
+        }
+
+        return WebResponse.<OrderResponse>builder().data(orderResponse).build();
+    }
 
 }

@@ -19,5 +19,9 @@ public class OrderResponse {
 
     private String outletId;
 
+    private String createdTime;
+
     private List<FoodSnapshotResponse> foodSnapshots;
+
+    private List<AddOnSnapshotResponse> addOnSnapshots;
 }

@@ -23,4 +23,6 @@ public class OrderRequest {
 
     private List<FoodSnapshotResponse> foodSnapshots;
 
+    private List<AddOnSnapshotResponse> addOnSnapshots;
+
 }

@@ -5,6 +5,7 @@ import lile_manalu.spring_boot_project.entity.Food;
 import lile_manalu.spring_boot_project.model.*;
 import lile_manalu.spring_boot_project.repository.AddOnRepository;
 import lile_manalu.spring_boot_project.repository.FoodRepository;
+import lile_manalu.spring_boot_project.repository.OutletRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +30,9 @@ public class FoodService {
 
     @Autowired
     private AddOnRepository addOnRepository;
+
+    @Autowired
+    private OutletRepository outletRepository;
 
     public CreateFoodResponse create(CreateFoodRequest request) {
         logger.debug("Request to create food: {}", request);
@@ -81,7 +85,7 @@ public class FoodService {
                 .build();
     }
 
-
+    //get food by food Id
     public FoodResponse get(String id) {
         logger.debug("Fetching food item with ID: {}", id);
 
@@ -96,6 +100,27 @@ public class FoodService {
 
         return response;
     }
+
+    // Service method to get all food items for a specific outlet
+    public List<FoodResponse> list(String outletId) {
+        logger.debug("Fetching food items for outlet ID: {}", outletId);
+
+        List<Food> foods = foodRepository.findByOutletId(outletId);
+
+        if (foods.isEmpty()) {
+            logger.error("No food items found for outlet ID: {}", outletId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No food items found for this outlet");
+        }
+
+        // Convert the list of Food entities to FoodResponse DTOs
+        List<FoodResponse> foodResponses = foods.stream()
+                .map(this::toFoodResponse)
+                .collect(Collectors.toList());
+
+        logger.info("Fetched {} food items for outlet ID: {}", foodResponses.size(), outletId);
+        return foodResponses;
+    }
+
 
     public FoodResponse update(UpdateFoodRequest request){
         logger.debug("Received update request: {}", request);

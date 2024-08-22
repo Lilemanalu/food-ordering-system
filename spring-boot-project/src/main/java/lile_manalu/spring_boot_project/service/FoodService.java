@@ -35,7 +35,7 @@ public class FoodService {
 
         Food food = new Food();
         food.setId(UUID.randomUUID().toString());
-        food.setOutlet_id(request.getOutlet_id());
+        food.setOutletId(request.getOutlet_id());
         food.setName(request.getName());
         food.setDescription(request.getDescription());
         food.setPrice(request.getPrice());
@@ -73,7 +73,7 @@ public class FoodService {
 
         return CreateFoodResponse.builder()
                 .id(savedFood.getId())
-                .outlet_id(savedFood.getOutlet_id())
+                .outlet_id(savedFood.getOutletId())
                 .name(savedFood.getName())
                 .price(savedFood.getPrice())
                 .description(savedFood.getDescription())
@@ -103,7 +103,7 @@ public class FoodService {
         Food food = foodRepository.findById(request.getId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Food not found"));
 
-        food.setOutlet_id(request.getOutlet_id());
+        food.setOutletId(request.getOutlet_id());
         food.setName(request.getName());
         food.setDescription(request.getDescription());
         food.setPrice(request.getPrice());
@@ -140,7 +140,7 @@ public class FoodService {
     private FoodResponse toFoodResponse(Food food){
         return FoodResponse.builder()
                 .id(food.getId())
-                .outlet_id(food.getOutlet_id())
+                .outlet_id(food.getOutletId())
                 .name(food.getName())
                 .description(food.getDescription())
                 .price(food.getPrice())

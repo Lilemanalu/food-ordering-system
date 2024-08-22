@@ -60,6 +60,27 @@ public class FoodController {
         }
     }
 
+
+    @GetMapping(
+            path = "/api/outlets/{outletId}/foods",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public WebResponse<List<FoodResponse>> list(@PathVariable("outletId") String outletId) {
+        logger.debug("Received request to fetch food items for outlet ID: {}", outletId);
+
+        List<FoodResponse> foodResponses;
+        try {
+            foodResponses = foodService.list(outletId);
+            logger.debug("Successfully fetched food items for outlet ID: {}", outletId);
+        } catch (Exception e) {
+            logger.error("Error fetching food items for outlet ID: {}", outletId, e);
+            throw e;
+        }
+
+        return WebResponse.<List<FoodResponse>>builder().data(foodResponses).build();
+    }
+
+
     @PutMapping(
             path = "/api/foods/{foodId}",
             consumes = MediaType.APPLICATION_JSON_VALUE,

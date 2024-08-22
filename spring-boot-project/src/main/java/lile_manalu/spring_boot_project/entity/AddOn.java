@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class AddOn {
     @Id
     private String id;
 
-    private String food_id;
+    private String foodId;
 
     private String name;
 
@@ -29,5 +30,5 @@ public class AddOn {
 
 //    @ManyToOne
 //    @JoinColumn(name = "food_id")
-    private Food food;
+//    private Optional<Food> food;
 }

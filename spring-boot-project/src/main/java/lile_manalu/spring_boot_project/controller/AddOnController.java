@@ -40,13 +40,13 @@ public class AddOnController {
     )
     public WebResponse<AddOnResponse> update(@RequestBody AddOnRequest request,
                                              @PathVariable("addOnId") String id) {
-        log.debug("Received request to update AddOn with id: {} for Food with id: {}", id, request.getFood_id());
+        logger.debug("Received request to update AddOn with id: {} for Food with id: {}", id, request.getFood_id());
 
         request.setId(id);
 
         AddOnResponse addOnResponse = addOnService.update(request, id);
 
-        log.info("Successfully updated AddOn with id: {} for Food with id: {}", id, addOnResponse.getFood_id());
+        logger.info("Successfully updated AddOn with id: {} for Food with id: {}", id, addOnResponse.getFood_id());
 
         return WebResponse.<AddOnResponse>builder().data(addOnResponse).build();
     }
@@ -56,11 +56,11 @@ public class AddOnController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     public WebResponse<String> remove(@PathVariable("addOnId") String id) {
-        log.debug("Received request to delete AddOn with id: {}", id);
+        logger.debug("Received request to delete AddOn with id: {}", id);
 
         addOnService.remove(id);
 
-        log.info("Successfully deleted AddOn with id: {}", id);
+        logger.info("Successfully deleted AddOn with id: {}", id);
 
         return WebResponse.<String>builder().data("OK").build();
     }

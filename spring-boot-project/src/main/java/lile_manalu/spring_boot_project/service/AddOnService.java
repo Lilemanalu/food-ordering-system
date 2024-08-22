@@ -52,21 +52,21 @@ public class AddOnService {
     }
 
     public AddOnResponse update(AddOnRequest request, String id) {
-        log.debug("Starting update process for AddOn with id: {} for Food with id: {}", id, request.getFood_id());
+        logger.debug("Starting update process for AddOn with id: {} for Food with id: {}", id, request.getFood_id());
 
         Food food = foodRepository.findById(request.getFood_id())
                 .orElseThrow(() -> {
-                    log.error("Food with id: {} not found", request.getFood_id());
+                    logger.error("Food with id: {} not found", request.getFood_id());
                     return new ResponseStatusException(HttpStatus.NOT_FOUND, "Food is not found");
                 });
 
         AddOn addOn = addOnRepository.findFirstByFoodIdAndId(request.getFood_id(), id)
                 .orElseThrow(() -> {
-                    log.error("Add On with id: {} not found for Food with id: {}", id, request.getFood_id());
+                    logger.error("Add On with id: {} not found for Food with id: {}", id, request.getFood_id());
                     return new ResponseStatusException(HttpStatus.NOT_FOUND, "Add On is not found");
                 });
 
-        log.debug("Updating AddOn with id: {} for Food with id: {}. New name: {}, New description: {}, New price: {}",
+        logger.debug("Updating AddOn with id: {} for Food with id: {}. New name: {}, New description: {}, New price: {}",
                 addOn.getId(), request.getFood_id(), request.getName(), request.getDescription(), request.getPrice());
 
         addOn.setFoodId(request.getFood_id());
@@ -76,25 +76,25 @@ public class AddOnService {
 //        addOn.setFood(food);
         addOnRepository.save(addOn);
 
-        log.info("Successfully updated AddOn with id: {} for Food with id: {}", addOn.getId(), request.getFood_id());
+        logger.info("Successfully updated AddOn with id: {} for Food with id: {}", addOn.getId(), request.getFood_id());
 
         return toAddOnResponse(addOn);
     }
 
     public void remove(String id) {
-        log.debug("Starting delete process for AddOn with id: {}", id);
+        logger.debug("Starting delete process for AddOn with id: {}", id);
 
         AddOn addOn = addOnRepository.findById( id)
                 .orElseThrow(() -> {
-                    log.error("Add On with id: {} not found", id);
+                    logger.error("Add On with id: {} not found", id);
                     return new ResponseStatusException(HttpStatus.NOT_FOUND, "Add On is not found");
                 });
 
-        log.debug("Deleting AddOn with id: {} for Food with id: {}", addOn.getId(), addOn.getFoodId());
+        logger.debug("Deleting AddOn with id: {} for Food with id: {}", addOn.getId(), addOn.getFoodId());
 
         addOnRepository.delete(addOn);
 
-        log.info("Successfully deleted AddOn with id: {} for Food with id: {}", addOn.getId(), addOn.getFoodId());
+        logger.info("Successfully deleted AddOn with id: {} for Food with id: {}", addOn.getId(), addOn.getFoodId());
     }
 
     private AddOnResponse toAddOnResponse(AddOn addOn) {

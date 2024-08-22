@@ -21,9 +21,9 @@ public class AddOnSnapshot {
     @Id
     private String id;
 
-    private String AddOnId;
+    private String addOnId;
 
-    private String FoodSnapshotId;
+    private String foodSnapshotId;
 
     private String name;
 

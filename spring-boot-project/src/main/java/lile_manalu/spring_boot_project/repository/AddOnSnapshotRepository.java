@@ -12,5 +12,5 @@ public interface AddOnSnapshotRepository extends JpaRepository<AddOnSnapshot, St
     @Override
     Optional<AddOnSnapshot> findById(String id);
 
-    List<AddOnSnapshot> findByFoodSnapshotId(String snapshotId);
+    List<AddOnSnapshot> findByFoodSnapshotId(String foodSnapshotId);
 }

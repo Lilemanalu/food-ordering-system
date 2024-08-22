@@ -19,7 +19,7 @@ public class Food {
     @Id
     private String id;
 
-    private String outlet_id;
+    private String outletId;
 
     private String name;
 

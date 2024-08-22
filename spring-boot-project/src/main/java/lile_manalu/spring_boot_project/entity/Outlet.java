@@ -20,7 +20,7 @@ public class Outlet {
     @Id
     private String id;
 
-    private String merchant_id;
+    private String merchantId;
 
     private String name;
 

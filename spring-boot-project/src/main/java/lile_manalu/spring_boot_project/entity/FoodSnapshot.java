@@ -21,11 +21,11 @@ public class FoodSnapshot {
     @Id
     private String id;
 
-    private String order_id;
+    private String orderId;
 
-    private String food_id;
+    private String foodId;
 
-    private String outlet_id;
+    private String outletId;
 
     private String name;
 

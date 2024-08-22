@@ -21,9 +21,9 @@ public class Order {
     @Id
     private String id;
 
-    private String user_id;
+    private String userId;
 
-    private String outlet_id;
+    private String outletId;
 
     private Date created_time;
 }

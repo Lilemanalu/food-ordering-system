@@ -50,7 +50,8 @@ public class FoodService {
             for (AddOnRequest addOnRequest : request.getAddOns()) {
                 AddOn addOn = new AddOn();
                 addOn.setId(UUID.randomUUID().toString());
-                addOn.setFood(savedFood);
+                addOn.setFoodId(food.getId());
+//                addOn.setFood(savedFood);
                 addOn.setName(addOnRequest.getName());
                 addOn.setDescription(addOnRequest.getDescription());
                 addOn.setPrice(addOnRequest.getPrice());
@@ -61,7 +62,7 @@ public class FoodService {
                 addOnResponses.add(
                         AddOnResponse.builder()
                                 .id(savedAddOn.getId())
-                                .food_id(savedAddOn.getFood_id())
+                                .food_id(savedAddOn.getFoodId())
                                 .name(savedAddOn.getName())
                                 .description(savedAddOn.getDescription())
                                 .price(savedAddOn.getPrice())

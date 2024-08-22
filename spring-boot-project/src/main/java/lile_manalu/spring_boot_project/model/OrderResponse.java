@@ -23,5 +23,4 @@ public class OrderResponse {
 
     private List<FoodSnapshotResponse> foodSnapshots;
 
-    private List<AddOnSnapshotResponse> addOnSnapshots;
 }

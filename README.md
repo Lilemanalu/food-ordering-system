@@ -34,4 +34,4 @@ Detailed information for each API endpoint can be found in the [API Specificatio
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/Lilemanalu/spring-boot-project.git
+   git clone https://github.com/Lilemanalu/food-ordering-system.git
